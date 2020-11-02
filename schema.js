@@ -16,6 +16,7 @@ const typeDefs = gql`
 
   type Query {
     questions: [Question]
+    question(id: ID!): Question
   }
 `;
 

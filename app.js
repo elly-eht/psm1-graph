@@ -17,6 +17,9 @@ const resolvers = {
     questions: (_, __, { dataSources }) => {
       return dataSources.questionAPI.getQuestions();
     },
+    question: (_, { id }, { dataSources }) => {
+      return dataSources.questionAPI.getQuestion(id);
+    },
   },
 };
 
