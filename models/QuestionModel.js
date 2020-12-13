@@ -7,7 +7,7 @@ const answer = new mongoose.Schema({
 
 const question = new mongoose.Schema({
   questionText: String,
-  type: { type: String },
+  isMultiChoices: Boolean,
   answers: [
     {
       answerText: String,

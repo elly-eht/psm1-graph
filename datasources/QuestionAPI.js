@@ -2,16 +2,23 @@ import { MongoDataSource } from "apollo-datasource-mongodb";
 import Mongoose from "mongoose";
 export default class QuestionAPI extends MongoDataSource {
   getQuestions() {
-    const questions = this.model.find();
-    console.log(questions);
-    return questions;
+    return this.model.find();
   }
 
   getQuestion(questionId) {
-    const vale = this.model.findById(Mongoose.Types.ObjectId(questionId));
-    console.log(typeof vale);
-    console.log(vale);
-    console.log(vale.answers);
-    return vale;
+    return this.model.findById(Mongoose.Types.ObjectId(questionId));
+  }
+
+  updateQuestion1(id, input) {
+    const question = this.model.findByIdAndUpdate(id, input, {
+      new: true,
+      upsert: true,
+    });
+    return question;
+  }
+
+  deleteQuestion(id) {
+    this.model.findOneAndDelete(id);
+    return true;
   }
 }

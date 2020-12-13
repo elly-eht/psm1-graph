@@ -3,9 +3,20 @@ import { gql } from "apollo-server";
 const typeDefs = gql`
   type Question {
     id: ID!
-    type: String
+    isMultiChoices: Boolean
     questionText: String
     answers: [Answer]
+  }
+
+  input QuestionInput {
+    isMultiChoices: Boolean
+    questionText: String
+    answers: [AnswerInput]
+  }
+
+  input AnswerInput {
+    answerText: String
+    isCorrect: Boolean
   }
 
   type Answer {
@@ -17,6 +28,13 @@ const typeDefs = gql`
   type Query {
     questions: [Question]
     question(id: ID!): Question
+  }
+
+  type Mutation {
+    addQuestion(input: QuestionInput): Question!
+    updateQuestion(id: ID, input: QuestionInput): Question
+    updateAnswer(id: ID, input: AnswerInput): Answer!
+    removeQuestion(id: ID): Boolean
   }
 `;
 
